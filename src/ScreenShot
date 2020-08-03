@@ -1,0 +1,27 @@
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Actipopup {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", ".\\Software\\chromedriver.exe");
+		ChromeDriver driver=new ChromeDriver();
+		driver.manage().window().maximize();  
+		driver.navigate().to("https://demo.actitime.com/login.do");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.findElement(By.id("username")).sendKeys("admin");
+	    driver.findElement(By.name("pwd")).sendKeys("manager" , Keys.ENTER);
+	    driver.findElement(By.xpath("//div[@onclick='openHelpAndSupportMenu(event)']/descendant::div[@class='popup_menu_icon']")).click();
+	    driver.findElement(By.xpath("//a[contains(.,'About your actiTIME')]")).click();
+	  //div[@onclick='openHelpAndSupportMenu(event)']/descendant::div[@class='popup_menu_icon']
+	    //driver.findElement(By.xpath("")).click();
+	    WebElement username =driver.findElement(By.xpath("//span[contains(.,'© 2020 actiTIME Inc. All rights reserved.')]"));
+      	String usertext = username.getText();
+    	System.out.println(usertext); 
+    	Thread.sleep(3000);
+    	driver.findElement(By.xpath("//div[@id='aboutPopupCloseButtonId']")).click();
+}
+}
